@@ -1,0 +1,56 @@
+name: WeatherApp
+configs:
+  Development Debug: debug
+  Development Release: release
+settings:
+  configs:
+    Development Debug:
+      SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEVELDEBUG
+    Development Release:
+      SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEVELRELEASE
+
+options:
+  bundleIdPrefix: com.mina
+  createIntermediateGroups: true
+  deploymentTarget:
+    iOS: "15.0"
+#fileGroups:
+#- project.yml
+#- Configuration
+#- Makefile
+targets:
+  WeatherApp:
+    type: application
+    platform: iOS
+    sources: ["WeatherApp"]
+    scheme:
+      testTargets:
+        - WeatherAppTests
+      configVariants:
+        - Development
+    preBuildScripts:
+      - name: "SwiftLint"
+        script: |
+                export PATH="$PATH:/opt/homebrew/bin"
+                if which swiftlint > /dev/null; then
+                    swiftlint
+                else
+                    echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+                fi
+
+    settings:
+        base:
+            INFOPLIST_FILE: WeatherApp/Info.plist
+            PRODUCT_BUNDLE_IDENTIFIER: me.mina.WeatherApp
+            CODE_SIGN_STYLE: Automatic
+
+  WeatherAppTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: ["WeatherAppTests"]
+    dependencies:
+      - target: WeatherApp
+    settings:
+        base:
+            PRODUCT_BUNDLE_IDENTIFIER: com.mina.WeatherAppTests
+
