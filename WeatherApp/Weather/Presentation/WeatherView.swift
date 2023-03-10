@@ -24,7 +24,7 @@ struct WeatherMainView: View {
                 
                 NavigationLink("Show Forcast", destination:
                                 ForecastView( weatherViewModel: viewModel)
-                )
+                ).disabled(viewModel.error == "" ? false : true)
                     .navigationBarTitle(Text("Weather"))
                     .frame(width: UIScreen.main.bounds.width - 40, height: 70, alignment: .center)
                     .background(Color.black)
