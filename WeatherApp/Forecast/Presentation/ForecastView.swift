@@ -9,12 +9,8 @@ import SwiftUI
 import CoreLocation
 struct ForecastView: View {
     @StateObject var viewModel: ForecastViewModel = ForecastViewModel()
-//    var coordinates: CLLocationCoordinate2D?
-//    var currentWeather: WeatherModel?
-//    var unit: Int?
     var weatherViewModel: WeatherViewModel!
-    //    let forecastData: ForecastModel?
-//    
+    
     var body: some View {
             ZStack {
                 Color("BackgroundColor").edgesIgnoringSafeArea(.all)
@@ -64,28 +60,6 @@ struct ForecastView: View {
                 
             }
             
-    }
-    
-    func getDayOfWeek(date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE"
-        return dateFormatter.string(from: date)
-    }
-    func secondsToHoursMinutesSeconds(_ seconds: Double) -> String {
-        sdf(interval: seconds)
-        return "\(seconds / 3600)"
-        
-    }
-    func sdf(interval: Double) {
-        let interval = interval
-        
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute, .second]
-        formatter.unitsStyle = .full
-        
-        let formattedString = formatter.string(from: TimeInterval(interval))!
-        print("Ai 7aga", formattedString)
-        
     }
     
 }

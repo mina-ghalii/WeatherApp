@@ -14,7 +14,6 @@ struct InitialScreen: View {
         NavigationView {
             ZStack {
                 Color("BackgroundColor").edgesIgnoringSafeArea(.all)
-//                WeatherHelper.shared.getBackgroundColor(weatherCondition: viewModel.weatherCondition)
                 VStack {
                     WeatherView(viewModel: weatherViewModel, fromDashboard: true)
                     NavigationLink("Weather", destination: WeatherMainView(viewModel: weatherViewModel))
